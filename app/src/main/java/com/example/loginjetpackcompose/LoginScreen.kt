@@ -26,11 +26,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(){
+fun LoginScreen(navController: NavController){
 
     var email by remember {
         mutableStateOf("")
@@ -62,7 +68,9 @@ fun LoginScreen(){
             email = it
         }, label = {
             Text(text = "Email address")
-        } )
+        } ,
+            maxLines = 1)
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -70,11 +78,13 @@ fun LoginScreen(){
            password = it
         }, label = {
             Text(text = "Password")
-        }, visualTransformation = PasswordVisualTransformation())
+        }, visualTransformation = PasswordVisualTransformation(),
+            maxLines = 1)
 
         Spacer(modifier = Modifier.height(16.dp))
         
         Button(onClick = {
+            navController.navigate("home_screen")
             Log.i("Crendential","Email : $email Password : $password")
         }) {
             Text(text = "Login")
@@ -89,7 +99,10 @@ fun LoginScreen(){
 
         Spacer(modifier = Modifier.height(32.dp))
         
-        Text(text = "Or sign in with")
+        Text(text = "Or sign in with", modifier = Modifier.clickable{
+
+        })
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -125,22 +138,8 @@ fun LoginScreen(){
 
                     }
             )
-
-
-
-
         }
-
-
-
-
-
-        
-        
-
-
-
     }
-    
-    
 }
+
+
